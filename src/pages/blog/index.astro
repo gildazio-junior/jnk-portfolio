@@ -1,111 +1,59 @@
 ---
-import BaseHead from '../../components/BaseHead.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
-import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
 import FormattedDate from '../../components/FormattedDate.astro';
+import { getCollection } from 'astro:content';
 
-const posts = (await getCollection('blog')).sort(
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-		<style>
-			main {
-				width: 960px;
+<Base
+	title="Artigos"
+	description="Artigos sobre Datadog, Grafana, Cloudflare e o uso de IA na observabilidade."
+>
+	<div class="wrap narrow">
+		<div class="page-head">
+			<h1>Artigos</h1>
+			<p>Notas práticas sobre ferramentas de observabilidade e como a IA está mudando a forma de operar sistemas.</p>
+		</div>
+		<ul class="posts">
+			{
+				posts.map((post) => (
+					<li>
+						<a class="card" href={`/blog/${post.id}/`}>
+							<div class="meta">
+								<FormattedDate date={post.data.pubDate} />
+							</div>
+							<h2>{post.data.title}</h2>
+							<p>{post.data.description}</p>
+							{post.data.tags.length > 0 && (
+								<div class="tags">
+									{post.data.tags.map((t) => (
+										<span class="tag">{t}</span>
+									))}
+								</div>
+							)}
+						</a>
+					</li>
+				))
 			}
-			ul {
-				display: flex;
-				flex-wrap: wrap;
-				gap: 2rem;
-				list-style-type: none;
-				margin: 0;
-				padding: 0;
-			}
-			ul li {
-				width: calc(50% - 1rem);
-			}
-			ul li * {
-				text-decoration: none;
-				transition: 0.2s ease;
-			}
-			ul li:first-child {
-				width: 100%;
-				margin-bottom: 1rem;
-				text-align: center;
-			}
-			ul li:first-child img {
-				width: 100%;
-			}
-			ul li:first-child .title {
-				font-size: 2.369rem;
-			}
-			ul li img {
-				margin-bottom: 0.5rem;
-				border-radius: 12px;
-			}
-			ul li a {
-				display: block;
-			}
-			.title {
-				margin: 0;
-				color: rgb(var(--black));
-				line-height: 1;
-			}
-			.date {
-				margin: 0;
-				color: rgb(var(--gray));
-			}
-			ul li a:hover h4,
-			ul li a:hover .date {
-				color: rgb(var(--accent));
-			}
-			ul a:hover img {
-				box-shadow: var(--box-shadow);
-			}
-			@media (max-width: 720px) {
-				ul {
-					gap: 0.5em;
-				}
-				ul li {
-					width: 100%;
-					text-align: center;
-				}
-				ul li:first-child {
-					margin-bottom: 0;
-				}
-				ul li:first-child .title {
-					font-size: 1.563em;
-				}
-			}
-		</style>
-	</head>
-	<body>
-		<Header />
-		<main>
-			<section>
-				<ul>
-					{
-						posts.map((post) => (
-							<li>
-								<a href={`/blog/${post.id}/`}>
-									<img width={720} height={360} src={post.data.heroImage} alt="" />
-									<h4 class="title">{post.data.title}</h4>
-									<p class="date">
-										<FormattedDate date={post.data.pubDate} />
-									</p>
-								</a>
-							</li>
-						))
-					}
-				</ul>
-			</section>
-		</main>
-		<Footer />
-	</body>
-</html>
+		</ul>
+	</div>
+</Base>
+<style>
+	.posts {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: grid;
+		gap: 16px;
+	}
+	.posts h2 {
+		margin: 4px 0 6px;
+		font-size: 21px;
+	}
+	.posts .tags {
+		margin-top: 12px;
+	}
+</style>

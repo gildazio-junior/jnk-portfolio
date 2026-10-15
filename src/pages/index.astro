@@ -1,50 +1,90 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import Base from '../layouts/Base.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import { SITE_TITLE, SITE_DESCRIPTION, CONTACT } from '../consts';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+	.slice(0, 3);
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
-				template serves as a lightweight, minimally-styled starting point for anyone looking to build
-				a personal website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to <a href="https://docs.astro.build/"
-					>read the docs
-				</a> or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out <a
-					href="https://github.com/Charca/astro-blog-template"
-					>astro-blog-template
-				</a> by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
-		</main>
-		<Footer />
-	</body>
-</html>
+<Base title={SITE_TITLE} description={SITE_DESCRIPTION}>
+	<div class="wrap hero">
+		<span class="eyebrow">Analista DevOps · Observabilidade &amp; Cloud</span>
+		<h1>Faço sistemas em produção ficarem visíveis — antes que o cliente perceba o problema.</h1>
+		<p class="lead">
+			Sou Gildázio Santos Junior. Há mais de 15 anos em TI, saí da infraestrutura e do ERP para a
+			observabilidade: monitoro serviços críticos como pagamentos via Pix, verificação de identidade e
+			sistemas transacionais com Datadog, Grafana, Cloudflare e CloudWatch.
+		</p>
+		<div class="btns">
+			<a class="btn primary" href="/curriculo">Ver currículo</a>
+			<a class="btn" href="/projetos">Projetos</a>
+			<a class="btn" href={CONTACT.linkedin} target="_blank" rel="noopener">LinkedIn</a>
+		</div>
+	</div>
+
+	<section class="block">
+		<div class="wrap">
+			<h2>No que eu trabalho</h2>
+			<p class="sub">O dia a dia de quem cuida da saúde de sistemas em produção.</p>
+			<div class="grid">
+				<div class="card">
+					<h3>Observabilidade</h3>
+					<p>Dashboards, logs, métricas e alertas que respondem rápido à pergunta "o que está quebrado e por quê".</p>
+				</div>
+				<div class="card">
+					<h3>Monitoramento de negócio</h3>
+					<p>Fluxos críticos acompanhados ponta a ponta: pagamentos instantâneos, KYC/liveness e transações.</p>
+				</div>
+				<div class="card">
+					<h3>Resposta a incidentes</h3>
+					<p>Atendimento N2 em produção, triagem com o N1 e escalonamento certo para o time certo.</p>
+				</div>
+				<div class="card">
+					<h3>Cloudflare &amp; cloud</h3>
+					<p>DNS, CDN, segurança e Workers — este site, aliás, roda na Cloudflare a partir de um repositório no GitHub.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	{
+		posts.length > 0 && (
+			<section class="block">
+				<div class="wrap">
+					<h2>Artigos recentes</h2>
+					<p class="sub">Notas sobre ferramentas de observabilidade e como a IA está mudando essa área.</p>
+					<div class="grid">
+						{posts.map((p) => (
+							<a class="card" href={`/blog/${p.id}/`}>
+								<div class="meta"><FormattedDate date={p.data.pubDate} /></div>
+								<h3>{p.data.title}</h3>
+								<p>{p.data.description}</p>
+							</a>
+						))}
+					</div>
+				</div>
+			</section>
+		)
+	}
+</Base>
+<style>
+	.hero {
+		padding-top: 80px;
+		padding-bottom: 64px;
+	}
+	h1 {
+		font-size: clamp(30px, 4.8vw, 50px);
+		line-height: 1.1;
+		margin: 0 0 18px;
+		max-width: 22ch;
+	}
+	.lead {
+		font-size: clamp(17px, 2vw, 19px);
+		color: var(--muted);
+		max-width: 64ch;
+		margin: 0 0 28px;
+	}
+</style>

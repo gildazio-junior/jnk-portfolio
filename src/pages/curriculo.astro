@@ -1,0 +1,179 @@
+---
+import Base from '../layouts/Base.astro';
+import { EXPERIENCE, SKILLS, CONTACT } from '../consts';
+---
+
+<Base
+	title="Currículo"
+	description="Currículo de Gildázio Santos Junior — Analista DevOps com foco em observabilidade e cloud."
+>
+	<div class="wrap">
+		<div class="page-head">
+			<h1>Gildázio Santos Junior</h1>
+			<p>Analista DevOps · Observabilidade &amp; Cloud</p>
+			<p class="contact">
+				<a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a> ·
+				<a href={CONTACT.linkedin} target="_blank" rel="noopener">LinkedIn</a>
+			</p>
+			<div class="btns no-print">
+				<button class="btn primary" onclick="window.print()">Baixar em PDF</button>
+				<a class="btn" href={`mailto:${CONTACT.email}?subject=Oportunidade`}>Entrar em contato</a>
+			</div>
+		</div>
+
+		<section class="block">
+			<h2>Resumo</h2>
+			<p class="summary">
+				Analista DevOps com foco em observabilidade e cloud, com mais de 15 anos de experiência em TI e
+				infraestrutura. Nos últimos dois anos, atuei no monitoramento de serviços críticos em produção
+				(KYC/Liveness, transacional e pagamentos via Pix) com Datadog, Grafana, Cloudflare e MongoDB.
+				Tenho sólida experiência no ERP Sankhya Web — com certificações em diversos módulos, da
+				implantação ao desenvolvimento de telas — e em Oracle PL/SQL. Construí minha base em
+				infraestrutura, com uma década dedicada a servidores Windows, firewalls Linux (pfSense e Endian),
+				CPD, virtualização e cabeamento estruturado.
+			</p>
+		</section>
+
+		<section class="block">
+			<h2>Experiência</h2>
+			<ol class="timeline">
+				{
+					EXPERIENCE.map((job) => (
+						<li>
+							<div class="job-head">
+								<div>
+									<h3>{job.role}</h3>
+									<div class="company">{job.company}</div>
+								</div>
+								<span class="period">{job.period}</span>
+							</div>
+							<ul>
+								{job.bullets.map((b) => (
+									<li>{b}</li>
+								))}
+							</ul>
+						</li>
+					))
+				}
+			</ol>
+		</section>
+
+		<section class="block">
+			<h2>Competências</h2>
+			<div class="skills">
+				{
+					SKILLS.map((s) => (
+						<div class="skill">
+							<h3>{s.area}</h3>
+							<div class="tags">
+								{s.items.map((i) => (
+									<span class="tag">{i}</span>
+								))}
+							</div>
+						</div>
+					))
+				}
+			</div>
+		</section>
+
+		<section class="block">
+			<h2>Formação e certificações</h2>
+			<ul class="plain">
+				<li><strong>Tecnólogo em Análise e Desenvolvimento de Sistemas</strong> — Faculdade UNA</li>
+				<li><strong>Certificações em módulos do ERP Sankhya Web</strong></li>
+			</ul>
+			<h3 class="extra-title">Informações adicionais</h3>
+			<ul class="plain">
+				<li>CNH A e B, veículo próprio e disponibilidade para viagens.</li>
+				<li>Atendimento PJ via JNK Serviços de Tecnologia.</li>
+			</ul>
+		</section>
+	</div>
+</Base>
+<style>
+	.contact {
+		font-size: 16px !important;
+		margin: 10px 0 22px !important;
+	}
+	.summary {
+		max-width: 75ch;
+		margin: 0;
+	}
+	.timeline {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+	.timeline > li {
+		position: relative;
+		padding: 0 0 28px 22px;
+		border-left: 2px solid var(--line);
+	}
+	.timeline > li::before {
+		content: '';
+		position: absolute;
+		left: -7px;
+		top: 6px;
+		width: 12px;
+		height: 12px;
+		border-radius: 50%;
+		background: var(--accent);
+	}
+	.job-head {
+		display: flex;
+		justify-content: space-between;
+		gap: 12px;
+		flex-wrap: wrap;
+	}
+	.job-head h3 {
+		margin: 0;
+		font-size: 18px;
+	}
+	.company {
+		color: var(--accent);
+		font-weight: 600;
+	}
+	.period {
+		color: var(--muted);
+		font-size: 14px;
+		white-space: nowrap;
+	}
+	.timeline ul {
+		margin: 8px 0 0;
+		padding-left: 18px;
+		color: var(--muted);
+	}
+	.timeline ul li {
+		margin: 3px 0;
+	}
+	.skills {
+		display: grid;
+		gap: 22px;
+		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+	}
+	.skill h3 {
+		margin: 0 0 10px;
+		font-size: 16px;
+	}
+	.plain {
+		padding-left: 18px;
+		margin: 0;
+	}
+	.extra-title {
+		margin: 24px 0 8px;
+		font-size: 16px;
+	}
+	@media print {
+		.timeline > li {
+			break-inside: avoid;
+			padding-bottom: 12px;
+		}
+		.timeline ul {
+			color: #222;
+		}
+		a {
+			color: #000;
+			text-decoration: none;
+		}
+	}
+</style>

@@ -1,0 +1,148 @@
+---
+import Base from '../layouts/Base.astro';
+
+// Cada projeto segue o formato: contexto → o que foi feito → resultado.
+// Os casos profissionais são descritos de forma genérica, sem nomes ou dados internos de empregadores.
+const projects = [
+	{
+		title: 'Observabilidade de pagamentos instantâneos e verificação de identidade',
+		context:
+			'Plataforma de alto volume transacional em que qualquer falha em pagamentos via Pix ou na verificação de identidade (KYC/liveness) afeta diretamente o usuário e a receita.',
+		did: [
+			'Dashboards por fluxo de negócio, e não só por servidor: taxa de sucesso, latência e erros de cada etapa.',
+			'Alertas e análise de logs de aplicação e infraestrutura no Datadog, Grafana, Cloudflare e CloudWatch.',
+			'Plantão N2 noturno: triagem, investigação e escalonamento para a equipe responsável.',
+		],
+		result:
+			'Incidentes detectados e direcionados mais cedo, com contexto suficiente para o time certo agir.',
+		tags: ['Datadog', 'Grafana', 'CloudWatch', 'Cloudflare', 'Pix', 'KYC'],
+	},
+	{
+		title: 'Migração de dashboards do Datadog para Grafana gerenciado',
+		context:
+			'A operação deixou de usar o Datadog e passou para Amazon Managed Grafana com CloudWatch como fonte de dados.',
+		did: [
+			'Importação dos dashboards existentes a partir dos JSON exportados do Datadog.',
+			'Revisão de consultas e painéis para remover resquícios da sintaxe e dos campos de log do Datadog.',
+			'Adaptação dos painéis à realidade das métricas e logs do CloudWatch.',
+		],
+		result: 'Continuidade da visibilidade operacional durante a troca de ferramenta.',
+		tags: ['Grafana', 'Amazon Managed Grafana', 'CloudWatch', 'Datadog'],
+	},
+	{
+		title: 'Laboratório de observabilidade com a API da Cloudflare',
+		context:
+			'Projeto de estudo para aprofundar a stack aberta de observabilidade, usando dados reais de tráfego e segurança da Cloudflare.',
+		did: [
+			'Ambiente com Grafana, Prometheus, Loki, Tempo e OpenTelemetry em Docker.',
+			'Dashboards de visão geral, segurança, performance, logs e visão executiva.',
+			'Alertas, variáveis e provisionamento versionado em Git.',
+		],
+		result: 'Em andamento — a evolução será publicada aqui em artigos.',
+		tags: ['Grafana', 'Prometheus', 'Loki', 'Tempo', 'OpenTelemetry', 'Cloudflare API'],
+		status: 'Em andamento',
+	},
+	{
+		title: 'Telas, dashboards e otimização de banco no ERP',
+		context: 'Empresa usuária do ERP Sankhya W com demanda constante de relatórios e telas pelas áreas de negócio.',
+		did: [
+			'Desenvolvimento de telas e dashboards no Sankhya W, com interfaces mais eficientes.',
+			'Consultas e rotinas em Oracle PL/SQL para relatórios e painéis.',
+			'Diagnóstico e correção de problemas de desempenho e estabilidade no Oracle.',
+		],
+		result: 'Áreas usuárias com informação mais rápida e um banco mais estável.',
+		tags: ['Sankhya', 'Oracle PL/SQL'],
+	},
+	{
+		title: 'Este site',
+		context: 'Portfólio próprio, migrado da Wix para a Cloudflare.',
+		did: [
+			'Domínio .com.br com DNS na Cloudflare.',
+			'Site em Astro versionado no GitHub; cada alteração no repositório é publicada automaticamente no Cloudflare Workers.',
+		],
+		result: 'Site rápido, de custo zero de hospedagem e fácil de atualizar.',
+		tags: ['Astro', 'Cloudflare Workers', 'GitHub'],
+	},
+];
+---
+
+<Base
+	title="Projetos"
+	description="Projetos e casos de observabilidade, cloud e sistemas de Gildázio Santos Junior."
+>
+	<div class="wrap">
+		<div class="page-head">
+			<h1>Projetos</h1>
+			<p>Casos reais contados em três partes: o contexto, o que eu fiz e o resultado.</p>
+		</div>
+		<div class="list">
+			{
+				projects.map((p) => (
+					<article class="card project">
+						<div class="top">
+							<h2>{p.title}</h2>
+							{p.status && <span class="eyebrow">{p.status}</span>}
+						</div>
+						<h3>Contexto</h3>
+						<p>{p.context}</p>
+						<h3>O que eu fiz</h3>
+						<ul>
+							{p.did.map((d) => (
+								<li>{d}</li>
+							))}
+						</ul>
+						<h3>Resultado</h3>
+						<p>{p.result}</p>
+						<div class="tags">
+							{p.tags.map((t) => (
+								<span class="tag">{t}</span>
+							))}
+						</div>
+					</article>
+				))
+			}
+		</div>
+	</div>
+</Base>
+<style>
+	.list {
+		display: grid;
+		gap: 20px;
+	}
+	.project {
+		padding: 28px;
+	}
+	.top {
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-start;
+		gap: 12px;
+		flex-wrap: wrap;
+	}
+	.top .eyebrow {
+		margin: 0;
+	}
+	.project h2 {
+		margin: 0 0 6px;
+		font-size: 21px;
+	}
+	.project h3 {
+		font-size: 13px;
+		text-transform: uppercase;
+		letter-spacing: 0.6px;
+		color: var(--accent);
+		margin: 18px 0 4px;
+	}
+	.project p,
+	.project ul {
+		margin: 0;
+		color: var(--text);
+		font-size: 15.5px;
+	}
+	.project ul {
+		padding-left: 18px;
+	}
+	.project .tags {
+		margin-top: 18px;
+	}
+</style>
