@@ -11,8 +11,8 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
 
 <Base title={SITE_TITLE} description={SITE_DESCRIPTION}>
 	<div class="wrap hero">
-		<span class="eyebrow">Analista DevOps · Observabilidade &amp; Cloud</span>
 		<h1>Gildázio Santos Junior</h1>
+		<span class="eyebrow">Analista DevOps · Observabilidade &amp; Cloud</span>
 		<p class="lead">
 			Tenho mais de 15 anos de experiência em tecnologia. Comecei na manutenção de computadores, passei
 			pela administração de servidores e redes estruturadas e depois pelos sistemas ERP e bancos de dados
@@ -81,7 +81,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
 	h1 {
 		font-size: clamp(30px, 4.8vw, 50px);
 		line-height: 1.1;
-		margin: 0 0 18px;
+		margin: 0 0 14px;
 		max-width: 22ch;
 	}
 	.lead {
