@@ -8,6 +8,7 @@ export const CONTACT = {
 	email: "jnktecnologia@gmail.com",
 	linkedin: "https://www.linkedin.com/in/gildazio-santos-junior-19a93551/",
 	github: "https://github.com/gildazio-junior",
+	whatsapp: "https://wa.me/5531991576897?text=Ol%C3%A1%2C%20Gild%C3%A1zio%21%20Vi%20seu%20curr%C3%ADculo%20no%20site%20jnktecnologia.com.br%20e%20gostaria%20de%20conversar.",
 };
 
 export const COMPANY = {
