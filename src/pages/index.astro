@@ -33,20 +33,24 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
 		<div class="wrap">
 			<h2>No que eu trabalho</h2>
 			<p class="sub">O dia a dia de quem cuida da saúde de sistemas em produção.</p>
-			<div class="grid">
+			<div class="grid areas">
 				<div class="card">
+					<img class="card-img" src="/img/cards/observabilidade.svg" alt="" width="320" height="120" loading="lazy" />
 					<h3>Observabilidade</h3>
 					<p>Dashboards, logs, métricas e alertas que respondem rápido à pergunta "o que está quebrado e por quê".</p>
 				</div>
 				<div class="card">
+					<img class="card-img" src="/img/cards/negocio.svg" alt="" width="320" height="120" loading="lazy" />
 					<h3>Monitoramento de negócio</h3>
 					<p>Fluxos críticos acompanhados ponta a ponta: pagamentos instantâneos, KYC/liveness e transações.</p>
 				</div>
 				<div class="card">
+					<img class="card-img" src="/img/cards/incidentes.svg" alt="" width="320" height="120" loading="lazy" />
 					<h3>Resposta a incidentes</h3>
 					<p>Atendimento N2 em produção, triagem com o N1 e escalonamento certo para o time certo.</p>
 				</div>
 				<div class="card">
+					<img class="card-img" src="/img/cards/cloudflare.svg" alt="" width="320" height="120" loading="lazy" />
 					<h3>Cloudflare &amp; cloud</h3>
 					<p>DNS, CDN, segurança e Workers — este site, aliás, roda na Cloudflare a partir de um repositório no GitHub.</p>
 				</div>
@@ -75,6 +79,21 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
 	}
 </Base>
 <style>
+	.areas {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+	@media (max-width: 640px) {
+		.areas {
+			grid-template-columns: 1fr;
+		}
+	}
+	.card-img {
+		display: block;
+		width: 100%;
+		height: auto;
+		margin-bottom: 14px;
+		border-radius: 10px;
+	}
 	.hero {
 		padding-top: 80px;
 		padding-bottom: 64px;
