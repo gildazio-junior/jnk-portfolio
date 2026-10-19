@@ -1,6 +1,8 @@
 // Dados globais do site. Edite aqui para atualizar textos em todas as páginas.
 
 export const SITE_TITLE = "Gildázio Santos Junior";
+// Complemento do título da página inicial (aparece na aba e nas prévias de links).
+export const SITE_TAGLINE = "Observabilidade & Cloud";
 export const SITE_DESCRIPTION =
 	"Analista DevOps com foco em observabilidade e cloud: Datadog, Grafana, Cloudflare e o uso de IA para enxergar sistemas em produção.";
 
