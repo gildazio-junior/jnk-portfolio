@@ -39,6 +39,19 @@ export const EXPERIENCE: Job[] = [
 		],
 	},
 	{
+		company: "Sankhya Gestão de Negócios",
+		role: "Implantador de ERP Sankhya (remoto)",
+		period: "jul 2024 – ago 2024",
+		bullets: [
+			"Implantação do ERP Sankhya W em novos clientes.",
+			"Configuração dos módulos e personalização de telas, em conjunto com a equipe de implantação.",
+			"Desenvolvimento de telas e dashboards com foco em usabilidade e eficiência para os usuários.",
+			"Escrita e otimização de consultas e rotinas em Oracle PL/SQL para relatórios, telas e dashboards do ERP.",
+			"Apoio à migração de dados para a base do Sankhya em projetos específicos.",
+			"Levantamento de requisitos com os usuários e atendimento a chamados de criação de relatórios e telas.",
+		],
+	},
+	{
 		company: "Granvita Quatree",
 		role: "Analista de Sistemas",
 		period: "ago 2023 – jul 2024",
