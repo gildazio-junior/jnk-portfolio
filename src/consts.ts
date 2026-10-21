@@ -34,6 +34,7 @@ export const EXPERIENCE: Job[] = [
 			"Observabilidade de serviços críticos em produção: verificação de identidade (KYC/Liveness), sistema transacional e pagamentos via Pix.",
 			"Monitoramento e análise de logs de aplicações e infraestrutura no Datadog, Grafana, Cloudflare e Amazon CloudWatch, com dashboards e alertas.",
 			"Atendimento N2 a incidentes em produção em plantão noturno, com escalonamento para as equipes responsáveis.",
+			"Uso de ferramentas de IA generativa no troubleshooting e na resolução de incidentes (correlação de logs, levantamento de hipóteses de causa raiz) e na criação de dashboards e consultas, reduzindo o tempo de análise.",
 			"Suporte ao N1 na análise e triagem de chamados; análises e relatórios operacionais no Metabase.",
 		],
 	},
